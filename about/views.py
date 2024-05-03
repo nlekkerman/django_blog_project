@@ -1,9 +1,19 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
+from django.shortcuts import render
 from .models import About
 
 
-def About_page(request):
-    about = get_object_or_404(About, pk=1)
+from django.shortcuts import render
+from .models import About
 
-    return render(request, 'about/about.html', {'about': about}) 
+
+def about_me(request):
+    """
+    Renders the About page
+    """
+    about = About.objects.all().order_by('-updated_on').first()
+
+    return render(
+        request,
+        "about/about_page.html",
+        {"about": about},
+    )

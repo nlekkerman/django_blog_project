@@ -36,11 +36,3 @@ def post_detail(request, slug):
 
 
 
-def about(request):
-    return render(request, 'about/about.html')   
-
-    queryset = About.objects.filter(status=1)
-    about = get_object_or_404(queryset, title=title)
-    
-    # Render the template with the context
-    return render(request, 'about/about.html',{"about": about})
