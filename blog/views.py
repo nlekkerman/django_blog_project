@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Post
 
-
 # Create your views here.
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
@@ -26,9 +25,22 @@ def post_detail(request, slug):
 
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
+    
 
     return render(
         request,
         "blog/post_detail.html",
-        {"post": post},
+        {"post": post, 
+        "coder": "NIKOLA SIMIC"},
     )
+
+
+
+def about(request):
+    return render(request, 'about/about.html')   
+
+    queryset = About.objects.filter(status=1)
+    about = get_object_or_404(queryset, title=title)
+    
+    # Render the template with the context
+    return render(request, 'about/about.html',{"about": about})
